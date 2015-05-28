@@ -123,7 +123,7 @@ public class MavenServerManager extends RemoteObjectWrapper<MavenServer> impleme
     if (pluginFileOrDir.isDirectory()) {
       File parentFile = getMavenPluginParentFile();
       myBundledMaven2Home = new File(parentFile, "maven2-server-impl/lib/maven2");
-      myBundledMaven3Home = new File(parentFile, "maven30-server-impl/lib/maven3");
+      myBundledMaven3Home = new File(parentFile, "maven33-server-impl/lib/maven33");
     }
     else {
       myBundledMaven2Home = new File(root, "maven2");

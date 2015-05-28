@@ -53,6 +53,7 @@ public class MavenGeneralSettings implements Cloneable {
   private MavenExecutionOptions.ChecksumPolicy checksumPolicy = MavenExecutionOptions.ChecksumPolicy.NOT_SET;
   private MavenExecutionOptions.FailureMode failureBehavior = MavenExecutionOptions.FailureMode.NOT_SET;
   private MavenExecutionOptions.PluginUpdatePolicy pluginUpdatePolicy = MavenExecutionOptions.PluginUpdatePolicy.DEFAULT;
+  private MavenExecutionOptions.PolyglotType polyglotType = MavenExecutionOptions.PolyglotType.NONE;
 
   private File myEffectiveLocalRepositoryCache;
   private Set<String> myDefaultPluginsCache;
@@ -87,6 +88,18 @@ public class MavenGeneralSettings implements Cloneable {
   public void setPluginUpdatePolicy(MavenExecutionOptions.PluginUpdatePolicy value) {
     if (value == null) return; // null may come from deserializator
     this.pluginUpdatePolicy = value;
+    changed();
+  }
+
+  @Property
+  @NotNull
+  public MavenExecutionOptions.PolyglotType getPolyglotType() {
+    return polyglotType;
+  }
+
+  public void setPolyglotType(MavenExecutionOptions.PolyglotType value) {
+    if (value == null) return; // null may come from deserializator
+    this.polyglotType = value;
     changed();
   }
 
@@ -318,6 +331,7 @@ public class MavenGeneralSettings implements Cloneable {
     if (nonRecursive != that.nonRecursive) return false;
     if (outputLevel != that.outputLevel) return false;
     if (pluginUpdatePolicy != that.pluginUpdatePolicy) return false;
+    if (polyglotType != that.polyglotType) return false;
     if (alwaysUpdateSnapshots != that.alwaysUpdateSnapshots) return false;
     if (printErrorStackTraces != that.printErrorStackTraces) return false;
     if (usePluginRegistry != that.usePluginRegistry) return false;
@@ -345,6 +359,7 @@ public class MavenGeneralSettings implements Cloneable {
     result = 31 * result + checksumPolicy.hashCode();
     result = 31 * result + failureBehavior.hashCode();
     result = 31 * result + pluginUpdatePolicy.hashCode();
+    result = 31 * result + polyglotType.hashCode();
     return result;
   }
 

@@ -18,6 +18,8 @@ package org.jetbrains.idea.maven.execution;
 import org.jetbrains.idea.maven.server.MavenServerConsole;
 import org.jetbrains.idea.maven.server.MavenServerSettings;
 
+import java.util.Locale;
+
 public class MavenExecutionOptions {
   public enum LoggingLevel {
     DEBUG("Debug", MavenServerConsole.LEVEL_DEBUG),
@@ -111,6 +113,35 @@ public class MavenExecutionOptions {
 
     public MavenServerSettings.UpdatePolicy getServerPolicy() {
       return myServerPolicy;
+    }
+  }
+
+  public enum PolyglotType {
+    NONE("Standard/POM", "xml"),
+    ATOM("Atom", "atom"),
+    GROOVY("Groovy", "groovy"),
+    RUBY("Ruby", "rb"),
+    SCALA("Scala", "scala"),
+    YAML("YAML", "yml");
+
+    private final String myDisplayString;
+    private final String myPomExtension;
+
+    PolyglotType(String displayString, String pomExtension) {
+      myDisplayString = displayString;
+      myPomExtension = pomExtension;
+    }
+
+    public String getDisplayString() {
+      return myDisplayString;
+    }
+
+    public String getPomExtension() {
+      return myPomExtension;
+    }
+
+    public String getPomFile() {
+      return "pom." + myPomExtension;
     }
   }
 }
